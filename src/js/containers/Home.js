@@ -8,13 +8,12 @@ import {Link} from 'react-router';
 
 class Home extends React.Component{
     render(){
-        return (<div>
+        return (<div className="f18">
             <h1>Liko's Home Page</h1>
             <h3>Hello I'm Liko!</h3>
             <p>this is my site.</p>
             <ul>
                 <li><Link to="weather">Weather App</Link></li>
-                <li className="m-t-ml"><Link to="worklite">WorkLite App</Link></li>
                 <li className="m-t-ml"><Link to="listlite">ListLite App</Link></li>
             </ul>
         </div>)

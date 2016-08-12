@@ -1,0 +1,338 @@
+@import './common.scss';
+
+$height-header: 80px;
+
+$ll-color-white: #fff;
+$ll-color-red : #ff5a5a;
+$ll-color-blue : #1fb6ec;
+$ll-color-green: #00d689;
+$ll-color-text: #345;
+$ll-color-white-alpha: rgba(255,255,255,0.8);
+$ll-color-black-alpha: rgba(29, 31, 43, 0.82);
+$ll-color-mask-alpha: rgba(255, 255, 255, 0.75);
+
+body{min-height: 100%;}
+#App{min-height: 500px; }
+
+#bg,
+#listlite-app{
+  height: 100%;
+  min-height: inherit;
+}
+
+#bg{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-image: url(../../public/images/bg.jpg);
+  z-index: -999;
+}
+/*listliteAPP*/
+#listlite-app{
+  @extend .content;
+  color: $ll-color-text;
+  height: 100%;
+  input[type='text'],
+  input[type='password'],
+  input[type='email']{
+    background-color: transparent;
+  }
+  button{
+    background-color: transparent;
+    border: none;
+  }
+}
+/*header bar*/
+.ll-header-bar{
+  position: fixed;
+  width: 100%;
+  height: 70px;
+  line-height: 1;
+  z-index: 99;
+  background-color: #fff;
+  color: #29a4ff;
+  font-family: Corbel;
+  padding-left: 15px;
+  h1{
+    font-weight: 100;
+  }
+  .icon-file-text-alt{
+    color: #ccc;
+  }
+}
+/*侧边栏*/
+#listlite-sider-bar{
+  position: fixed;
+  left: 0;
+  top: $height-header;
+  width: 240px;
+  height: 100%;
+  background-color: $ll-color-white-alpha;
+  z-index: 999;
+}
+/*徽标*/
+.ll-count_badge{
+  display: inline-block;
+  background: $ll-color-red;
+  color: #fff;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  border-radius: 18px;
+  font-size: 10px;
+  line-height: 16px;
+  vertical-align: text-top;
+  margin-left: 10px;
+  transform: scale(1);
+  transition: transform .3s;
+}
+.ll-count_badge.none{display: none;}
+.ll-list-name{
+  max-width: 190px;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+}
+/*清单编辑按钮*/
+.ll-list-edit{
+  display: inline-block;
+  position: absolute;
+  right: 1px;
+  top: 15px;
+  transform: scale(0);
+  transition: transform .3s;
+  .icon-pencil{
+    color: #b4b6b9;
+  }
+}
+/*清单编辑按钮hove样式*/
+.ll-list-edit:hover .icon-pencil{
+  color: $ll-color-text;
+}
+
+.ll-list-default,
+.ll-list-item{
+  position: relative;
+  //padding: 15px 0;
+  box-sizing: border-box;
+  height: 50px;
+  cursor: pointer;
+}
+/*伪元素实现清单当前游标指示效果*/
+.ll-list-default:after,
+.ll-list-item:after{
+  content: '';
+  height: 0;
+  width: 2px;
+  position: absolute;
+  background-color: $ll-color-blue;
+  right: -15px;
+  top: 25px;
+  transition: all .2s;
+}
+.ll-list-default.active:after,
+.ll-list-item.active:after{
+  height: 50px;
+  top: 0;
+  transition: all .2s;
+}
+
+.ll-list-item:hover{
+  cursor: pointer;
+  .ll-list-edit{
+    transform: scale(1);
+  }
+  .ll-count_badge{
+    transform: scale(0);
+  }
+}
+
+/*清单编辑面板*/
+.ll-list-editpanel-bg{
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: $ll-color-mask-alpha;
+  overflow: hidden;
+  transition: height .3s;
+}
+/*背景遮罩*/
+.ll-list-editpanel-bg.active{display: block;height: 100%;transition: height .3s;}
+.ll-list-editpanel-bg.active .ll-list-editpanel{margin-top: 200px;transition: all .3s;}
+/*编辑面板*/
+.ll-list-editpanel{
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 0;
+  color: #9ca0af;
+  background-color: $ll-color-black-alpha;
+  border-radius: 4px;
+  padding-bottom: 5px;
+  transition: margin-top .3s;
+  .ll-close-btn{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-weight: 100;
+    cursor: pointer;
+    padding: 7px;
+  }
+  .ll-close-btn:hover{color: $ll-color-red;}
+  input[type='text']{
+    display: block;
+    width: 100%;
+    border-color: rgb(92, 96, 111);
+    color: #fff;
+    box-sizing: border-box;
+    @extend .m-b-ml;
+  }
+  input[type='text']:focus{border-color: #2e99eb;}
+  .btn-group button{  color: #9ca0af; font-size: 16px }
+  .btn-group button .icon-spin{color: $ll-color-green;}
+  .btn-group button:hover{  color: $ll-color-green;}
+  .btn-group button:first-child{padding-left: 0;}
+}
+
+/*清单主内容区域*/
+#listlite-content{
+  width: 1080px;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 260px;
+  margin-top: $height-header;
+  background-color: $ll-color-white-alpha;
+  transition: all .3s;
+}
+#listlite-content.active{
+  width: 570px;
+}
+/*添加任务区域*/
+.ll-add-task{
+  height: 40px;
+  border: 1px solid #07aeef;
+  .task-content{
+    width: 100%;
+    input{
+      width: 100%;
+      border: none;
+    }
+  }
+  .task-date .react-date-field--theme-default {
+    border: none;
+    width: 78px;
+    height: 40px;
+/*    input{
+      background-color: transparent;
+    }*/
+  }
+  .task-add-btn{
+    width: 12px;
+    padding: 11px 10px;
+    height: 100%;
+    cursor: pointer;
+  }
+  .task-add-btn .icon-spin,
+  .task-add-btn:hover{
+    color: $ll-color-green;
+  }
+
+  .react-date-field > .react-date-field__picker{
+    right: -1px;
+  }
+}
+
+/*重写日期插件样式*/
+#listlite-content .react-date-field__input{
+  border: none !important;
+  background-color: transparent;
+}
+#listlite-content .react-date-picker__month-view--theme-default .react-date-picker__month-view-day .react-date-picker__month-view-day-text{
+  min-width: 30px;
+  max-width: 30px;
+  min-height: 30px;
+  max-height: 30px;
+  font-size: 12px;
+}
+/*关闭日期插件图标*/
+#listlite-content .react-date-field--theme-default .react-date-field__calendar-icon{
+  display: none;
+}
+
+.ll-task-item{
+  width: 100%;
+  cursor: pointer;
+  .task-content{
+    *{vertical-align: middle;}
+  }
+  .task-options{
+    width: 120px;
+    text-align: right;
+    .icon-star{
+      color: $ll-color-red;
+    }
+  }
+}
+.ll-task-item:hover{
+  color: $ll-color-blue;
+}
+
+.ll-taskdetail-panel{
+  position: fixed;
+  top: 80px;
+  right: -550px;
+  width: 480px;
+  background-color: $ll-color-white-alpha;
+  transition: right .3s;
+  @extend .p-ml;
+  h3{
+    margin-top: 0;
+  }
+  .ll-input{
+    border: none;
+    border-bottom: 1px solid #aaa;
+    width: 100%;
+  }
+  .react-date-field > .react-date-field__picker{
+    right: -1px;
+  }
+}
+.ll-taskdetail-panel.active{
+  right: 0;
+  transition: right .3s;
+}
+.ll-taskdetail-panel .task-content{
+  .ll-input{
+    padding-right: 105px;
+  }
+  .pos-a{
+    top: 2px;
+    right: 0;
+    width: 75px;
+    .react-date-field--theme-default{
+      border: none;
+    }
+  }
+}
+.ll-taskdetail-panel .subtask-item{
+  .ll-input{
+    padding-right: 30px;
+  }
+  .pos-a{
+    top: 2px;
+    right: 0;
+    width: 25px;
+    transform: scale(0);
+    transition: all .3s;
+  }
+}
+.ll-taskdetail-panel .subtask-item:hover .pos-a{
+  transform: scale(1);
+  transition: all .3s;
+}

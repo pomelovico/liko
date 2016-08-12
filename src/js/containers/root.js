@@ -28,6 +28,9 @@ class Root extends Component{
     constructor(props){
         super(props);
     }
+    componentDidMount(){
+        document.getElementById('App').style.minHeight = document.body.clientHeight+'px';
+    }
     render(){
         return(
             <Provider store = {store}>

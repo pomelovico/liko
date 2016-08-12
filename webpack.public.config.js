@@ -5,7 +5,7 @@ var webpack = require('webpack');
 var path = require('path');
 module.exports = {
     entry: {
-        bundle:'./src/js/index.js',
+        bundle:'./src2/js/index.js',
         vendor: ['react']
     },
     output: {
@@ -40,8 +40,8 @@ module.exports = {
             }
         }),
         new webpack.ProvidePlugin({
-            "Action": __dirname + "/src/js/actions/index.js",
-            "Common": __dirname + "/src/js/constants/index.js"
+            "Action": __dirname + "/src2/js/actions/index.js",
+            "Common": __dirname + "/src2/js/constants/index.js"
         })
     ]
 };

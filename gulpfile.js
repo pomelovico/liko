@@ -52,5 +52,4 @@ gulp.task('rev',function(){
         .pipe(gulp.dest('./public'))
 });
 gulp.task('default',function(){
-
 });

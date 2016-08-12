@@ -2,10 +2,12 @@ $color-link: #333;
 $color-text: #333;
 $color-ccc: #ccc;
 /*tags*/
+html{height: 100%;}
 html,body{
   font-size: 62.5%;
-  font-weight: 200;
+  font-weight: 400;
   font-family: Helvetica, Arial, "Microsoft YaHei UI";
+  position: relative;
 }
 html,body,ul,li{
   margin: 0;
@@ -17,6 +19,13 @@ a{
   color: $color-link;
 }
 
+hr{
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+  padding: 0;
+}
+
 
 .wrapper,
 .content,
@@ -25,6 +34,15 @@ a{
   margin: 0 auto;
   font-size: 16px;
   overflow: hidden;
+  height: inherit;
+}
+
+.panel{
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.box-shadow{
+  box-shadow: 0 0 10px 1px #ddd;
 }
 
 .color-ccc{color: $color-ccc}
@@ -40,6 +58,8 @@ a{
   clear: both;
 }
 /*display*/
+.d-t{display: table;width: 100%;}
+.d-tc{display: table-cell;    vertical-align: middle;}
 .d-ib{display: inline-block;}
 .d-flex{
   display: -webkit-flex;
@@ -135,6 +155,8 @@ input[type='email']{
   outline: none;
   padding: 0.5rem;
   transition: all 0.2s;
+  font-family: "Microsoft YaHei UI";
+  box-sizing: border-box;
 }
 
 input[type='text']:focus,
@@ -143,59 +165,6 @@ input[type='email']:focus{
   border-color: #00abde;
   transition: all 0.2s;
 }
-/*checkbox*/
-/*input[type='checkbox']{
-  position: relative;
-  width: 6px;
-  height: 6px;
-  margin-right: 10px;
-  background-color: #333;
-}
-input[type='checkbox']:before{
-  content: '';
-  display: inline-block;
-  box-sizing: border-box;
-  position: absolute;
-  top: -6px;
-  left: 0;
-  width: 16px;
-  height: 16px;
-  border-radius: 16px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  cursor: pointer;
-}
-input[type='checkbox']:checked:before{
-  background-color: #06bbe4;
-  border: 1px solid #fff;
-}*/
-
-/*radio*/
-/*input[type='radio']{
-  position: relative;
-  width: 6px;
-  height: 6px;
-  margin-right: 10px;
-}
-input[type='radio']:before{
-  position: absolute;
-  content: '';
-  box-sizing: border-box;
-  top: -6px;
-  width: 16px;
-  height: 16px;
-  border-radius: 16px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  cursor: pointer;
-}
-input[type='radio']:checked:before{
-  width: 16px;
-  height: 16px;
-  border-radius: 16px;
-  border: 5px solid #06bbe4;
-  background-color: #fff;
-}*/
 
 /*默认按钮样式*/
 input[type='button'],
@@ -231,3 +200,7 @@ $radius-xl: 6px;
 .radius-sm{  border-radius: $radius-sm;  }
 .radius-ml{  border-radius: $radius-ml;  }
 .radius-xl{  border-radius: $radius-xl;  }
+
+.cur-p{
+  cursor:pointer;
+}

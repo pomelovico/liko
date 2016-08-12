@@ -4,14 +4,18 @@
 import weather from './weather';
 import listlite from './listlite';
 
+
 let initialState = {
     weather:{
         date:'2016.07.05',
         temp:'32℃'
     },
     listlite:{
-        lists:[],
-        user:{}
+        lists:{},
+        user:{
+            default_list:1469068864,
+            current_list:1469068864
+        }
     }
 };
 

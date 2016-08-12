@@ -15,13 +15,6 @@ body{
 .content{
   width: $width-wrapper;
 }
-.panel{
-  background-color: #fff;
-  box-sizing: border-box;
-}
-.box-shadow{
-  box-shadow: 0 0 10px 1px #ddd;
-}
 #weather-app {
   .panel{
     @extend .box-shadow;
