@@ -26,6 +26,7 @@ class ListLite extends React.Component{
         </div>)
     }
 }
+
 export default connect(
     (state)=>{
         return {
