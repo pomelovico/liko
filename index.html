@@ -21,23 +21,21 @@
 <!-- endbuild -->
 <script src='http://cdn.bootcss.com/socket.io/1.3.7/socket.io.js'></script>
 <script>
-    // 连接服务端
+/*    // 连接服务端
     var socket = io('localhost:2120');
     // uid可以是自己网站的用户id，以便针对uid推送以及统计在线人数
     uid = 123;
     // socket连接后以uid登录
     socket.on('connect', function(){
         socket.emit('login', uid);
-/*
-       */
     });
     var uidx = 0;
-/*    setInterval(function(){
-
-        socket.emit('liko', uidx);
-        uidx++;
-        console.log(uidx)
-    },3000);*/
+//    setInterval(function(){
+//
+//        socket.emit('liko', uidx);
+//        uidx++;
+//        console.log(uidx)
+//    },3000);
     socket.on('liko', function(msg){
         console.log(msg);
     });
@@ -49,7 +47,7 @@
     // 后端推送来在线数据时
     socket.on('update_online_count', function(online_stat){
         console.log(online_stat);
-    });
+    });*/
 </script>
 </body>
 </html>
