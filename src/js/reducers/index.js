@@ -14,7 +14,8 @@ let initialState = {
         lists:{},
         user:{
             default_list:1469068864,
-            current_list:1469068864
+            current_list:1469068864,
+            isFetchingTasks:true
         }
     }
 };

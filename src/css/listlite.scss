@@ -5,13 +5,18 @@ $height-header: 80px;
 $ll-color-white: #fff;
 $ll-color-red : #ff5a5a;
 $ll-color-blue : #1fb6ec;
-$ll-color-green: #00d689;
+$ll-color-green: #00cb80;
 $ll-color-text: #345;
 $ll-color-white-alpha: rgba(255,255,255,0.8);
 $ll-color-black-alpha: rgba(29, 31, 43, 0.82);
 $ll-color-mask-alpha: rgba(255, 255, 255, 0.75);
 
 body{min-height: 100%;}
+a{color:#ccc;  transition: all .2s;  }
+a:hover{
+  color: $ll-color-blue;
+  transition: all .2s;
+}
 #App{min-height: 500px; }
 
 #bg,
@@ -25,8 +30,18 @@ body{min-height: 100%;}
   top: 0;
   left: 0;
   width: 100%;
-  background-image: url(../../public/images/bg.jpg);
+  //background-image: url(../images/bg.jpg);
+  background-image: url(http://ww1.sinaimg.cn/large/7e8b4ac8jw1eu9oj87fgwj21hc0u04ap.jpg);
   z-index: -999;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+
+@media screen and (max-width: 1100px) {
+  #bg{
+    background-size: auto 100%;
+  }
 }
 /*listliteAPP*/
 #listlite-app{
@@ -66,7 +81,7 @@ body{min-height: 100%;}
   position: fixed;
   left: 0;
   top: $height-header;
-  width: 240px;
+  width: 14%;
   height: 100%;
   background-color: $ll-color-white-alpha;
   z-index: 999;
@@ -194,24 +209,24 @@ body{min-height: 100%;}
   }
   input[type='text']:focus{border-color: #2e99eb;}
   .btn-group button{  color: #9ca0af; font-size: 16px }
-  .btn-group button .icon-spin{color: $ll-color-green;}
-  .btn-group button:hover{  color: $ll-color-green;}
+  //.btn-group button .icon-spin{color: $ll-color-blue;}
+  .btn-group button:hover{  color: $ll-color-blue;}
   .btn-group button:first-child{padding-left: 0;}
 }
 
 /*清单主内容区域*/
 #listlite-content{
-  width: 1080px;
+  width: 84%;
   height: 100%;
   display: inline-block;
   vertical-align: top;
-  margin-left: 260px;
+  margin-left: 15%;
   margin-top: $height-header;
   background-color: $ll-color-white-alpha;
   transition: all .3s;
 }
 #listlite-content.active{
-  width: 570px;
+  width: 52%;
 }
 /*添加任务区域*/
 .ll-add-task{
@@ -237,10 +252,11 @@ body{min-height: 100%;}
     padding: 11px 10px;
     height: 100%;
     cursor: pointer;
+    padding-left: 8px;
   }
   .task-add-btn .icon-spin,
   .task-add-btn:hover{
-    color: $ll-color-green;
+    color: $ll-color-blue;
   }
 
   .react-date-field > .react-date-field__picker{
@@ -268,6 +284,10 @@ body{min-height: 100%;}
 .ll-task-item{
   width: 100%;
   cursor: pointer;
+  .w20{
+    width: 20px;
+    padding-right: 6px;
+  }
   .task-content{
     *{vertical-align: middle;}
   }
@@ -282,14 +302,18 @@ body{min-height: 100%;}
 .ll-task-item:hover{
   color: $ll-color-blue;
 }
+.ll-task-item.done *{
+  color: #aaa;
+}
 
 .ll-taskdetail-panel{
   position: fixed;
   top: 80px;
-  right: -550px;
-  width: 480px;
+  right: -32%;
+  width: 32%;
   background-color: $ll-color-white-alpha;
   transition: right .3s;
+  box-sizing: border-box;
   @extend .p-ml;
   h3{
     margin-top: 0;
@@ -328,11 +352,27 @@ body{min-height: 100%;}
     top: 2px;
     right: 0;
     width: 25px;
-    transform: scale(0);
-    transition: all .3s;
   }
 }
-.ll-taskdetail-panel .subtask-item:hover .pos-a{
-  transform: scale(1);
+
+
+.loading{
+  height: 0;
+  padding-top: 0;
+  text-align: center;
   transition: all .3s;
+  overflow: hidden;
+  .icon-spinner{
+    font-size: 3rem;
+    display: none;
+  }
 }
+.loading.active{
+  height: 40px;
+  padding-top: 20px;
+  transition: all .3s;
+  .icon-spinner{
+    display: inline-block;
+  }
+}
+.icon-spin{color: $ll-color-blue;}

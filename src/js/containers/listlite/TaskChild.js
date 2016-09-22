@@ -7,19 +7,67 @@ import {bindActionCreators} from 'redux';
 
 import Input from '../../components/listlite/Input';
 
+class Child extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            isSync:false
+        }
+    }
+    componentWillReceiveProps(nextProps){
+        this.setSync(false);
+    }
+    edit(value){
+        this.props.editSubTask(this.props.child.cid,value);
+        this.setSync(true);
+    }
+    del(){
+        this.props.delSubTask({cid:this.props.child.cid});
+        this.setSync(true);
+    }
+    setSync(flag){
+        this.setState({isSync:flag});
+    }
+    render(){
+        const {child} = this.props;
+        return (<li className="pos-r subtask-item">
+            <Input
+                defaultClass="ll-input"
+                defaultValue={child.content}
+                onEnterKeyDown={(value)=>this.edit(value)}
+            />
+            <div className="pos-a">
+                {this.state.isSync ?
+                    <button >
+                        <i className="icon-spin icon-spinner"></i>
+                    </button>
+                    : <button onClick={()=>this.del()}>
+                        <i className="icon-remove"></i>
+                    </button>}
+            </div>
+        </li>)
+    }
+}
+
 class TaskChild extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            isAdd:false
+        }
     }
-    /*componentWillReceiveProps(nextProps){
-        console.log(nextProps);
-    }*/
+    componentWillReceiveProps(nextProps){
+        this.setSync(false);
+    }
+    setSync(flag){
+        this.setState({isAdd:flag});
+    }
     editSubTask(cid,value){
         if(value!=''){
             this.props.editSubTask({
                 cid:cid,
                 content:value
-            })
+            });
         }
     }
     addSubTask(content){
@@ -27,25 +75,20 @@ class TaskChild extends React.Component{
             this.props.addSubTask({
                 pid:this.props.pid,
                 content:content
-            })
+            });
+            this.setSync(true);
         }
     }
     render(){
         const child = this.props.childs ||{};
         let temp = [];
         for(let key in child){
-            temp.push(<li key={key}className="pos-r subtask-item">
-                    <Input
-                        defaultClass="ll-input"
-                        defaultValue={child[key].content}
-                        onEnterKeyDown={(value)=>this.editSubTask(child[key].cid,value)}
-                    />
-                    <div className="pos-a">
-                        <button onClick={()=>{this.props.delSubTask({cid:child[key].cid})}}>
-                            <i className="icon-remove"></i>
-                        </button>
-                    </div>
-            </li>)
+            temp.push(<Child
+                key={key}
+                child={child[key]}
+                editSubTask={(cid,value)=>this.editSubTask(cid,value)}
+                delSubTask={(data)=>this.props.delSubTask(data)}
+            />);
         }
         return (<div className="f12">
             <h5>子任务</h5>
@@ -59,6 +102,15 @@ class TaskChild extends React.Component{
                         onKeyDownClearField={true}
                     />
                     <div className="pos-a">
+                        {this.state.isAdd ?
+                            <button >
+                                <i className="icon-spin icon-spinner"></i>
+                            </button>
+                            :
+                            <button >
+                                <i className="icon-pencil"></i>
+                            </button>
+                        }
                     </div>
                 </li>
             </ul>

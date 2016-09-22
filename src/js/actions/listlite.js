@@ -3,13 +3,43 @@
  */
 import * as service from '../services/index';
 
-let localDomain = 'http://localhost/';
-
+let localDomain = 'http://localhost/php/thinkphp/';
+// let localDomain = 'http://121.42.167.30/liko/api/';
+const url_restful = {
+    index:'home/list/index',
+    gettasktodo:'home/list/list_task_todo',
+    gettaskdone:'home/list/list_task_done',
+    addlist:'home/ListType/add',
+    editlist:'home/ListType/edit',
+    dellist:'home/ListType/del',
+    addtask:'home/task/add',
+    edittask:'home/task/edit',
+    deltask:'home/task/del',
+    editchild:'home/task/edit_child',
+    addchild:'home/task/add_child',
+    delchild:'home/task/del_child'
+}
+const url_common = {
+    index:'?m=Home&c=list&a=index',
+    gettasktodo:'?m=home&c=list&a=list_task_todo',
+    gettaskdone:'?m=home&c=list&a=list_task_done',
+    addlist:'?m=home&c=ListType&a=add',
+    editlist:'?m=home&c=ListType&a=edit',
+    dellist:'?m=home&c=ListType&a=del',
+    addtask:'?m=home&c=task&a=add',
+    edittask:'?m=home&c=task&a=edit',
+    deltask:'?m=home&c=task&a=del',
+    editchild:'?m=home&c=task&a=edit_child',
+    addchild:'?m=home&c=task&a=add_child',
+    delchild:'?m=home&c=task&a=del_child'
+}
+const url = url_common;
+// const url = url_restful;
 /*初始化，获取清单列表*/
 export function listInitialize(data){
     return dispatch=>{
         service.sendAjax(
-            `${localDomain}php/thinkphp/home/list/index`,
+            `${localDomain}${url.index}`,
             data,
             function(res){
                 if(res.status){
@@ -34,7 +64,7 @@ export function setCurrentList(data){
 export function getTaskTodo(data){
     return dispatch=>{
         service.sendAjax(
-            `${localDomain}php/thinkphp/home/list/list_task_todo`,
+            `${localDomain}${url.gettasktodo}`,
             data,
             function(res){
                 if(res.status){
@@ -51,7 +81,7 @@ export function getTaskTodo(data){
 export function getTasksDone(data){
     return dispatch=>{
         service.sendAjax(
-            `${localDomain}php/thinkphp/home/list/list_task_done`,
+            `${localDomain}${url.gettaskdone}`,
             data,
             function(res){
                 if(res.status){
@@ -68,7 +98,7 @@ export function getTasksDone(data){
 export function addList(data){
     return dispatch=>{
         service.sendAjax(
-            `${localDomain}php/thinkphp/home/ListType/add`,
+            `${localDomain}${url.addlist}`,
             data,
             function(res){
                 if(res.status){
@@ -85,7 +115,7 @@ export function addList(data){
 export function editList(data){
     return dispatch=>{
         service.sendAjax(
-            `${localDomain}php/thinkphp/home/ListType/edit`,
+            `${localDomain}${url.editlist}`,
             data,
             function(res){
                 if(res.status){
@@ -102,7 +132,7 @@ export function editList(data){
 export function delList(data){
     return dispatch=>{
         service.sendAjax(
-            `${localDomain}php/thinkphp/home/ListType/del`,
+            `${localDomain}${url.dellist}`,
             data,
             function(res){
                 if(res.status){
@@ -119,7 +149,7 @@ export function delList(data){
 export function addTask(data){
     return dispatch=>{
         service.sendAjax(
-            `${localDomain}php/thinkphp/home/task/add`,
+            `${localDomain}${url.addtask}`,
             data,
             function(res){
                 if(res.status){
@@ -137,7 +167,7 @@ export function addTask(data){
 export function editTask(data){
     return dispatch=>{
         service.sendAjax(
-            `${localDomain}php/thinkphp/home/task/edit`,
+            `${localDomain}${url.edittask}`,
             data,
             function(res){
                 if(res.status){
@@ -155,7 +185,7 @@ export function editTask(data){
 export function delTask(data){
     return dispatch=>{
         service.sendAjax(
-            `${localDomain}php/thinkphp/home/task/del`,
+            `${localDomain}${url.deltask}`,
             data,
             function(res){
                 if(res.status){
@@ -173,7 +203,7 @@ export function delTask(data){
 export function editSubTask(data){
     return dispatch=>{
         service.sendAjax(
-            `${localDomain}php/thinkphp/home/task/edit_child`,
+            `${localDomain}${url.editchild}`,
             data,
             function(res){
                 if(res.status){
@@ -189,7 +219,7 @@ export function editSubTask(data){
 export function addSubTask(data){
     return dispatch=>{
         service.sendAjax(
-            `${localDomain}php/thinkphp/home/task/add_child`,
+            `${localDomain}${url.addchild}`,
             data,
             function(res){
                 if(res.status){
@@ -205,7 +235,7 @@ export function addSubTask(data){
 export function delSubTask(data){
     return dispatch=>{
         service.sendAjax(
-            `${localDomain}php/thinkphp/home/task/del_child`,
+            `${localDomain}${url.delchild}`,
             data,
             function(res){
                 if(res.status){
@@ -222,14 +252,20 @@ export function delSubTask(data){
 export function Fetching(list_id){
     return {
         type:Common.LIST.FETCHING,
-        list_id:list_id
+        data:list_id
+    }
+}
+export function setFetchTasksStatus(flag){
+    return {
+        type:Common.LIST.FETCH_TASKS,
+        data:flag
     }
 }
 
 /*export function listInitialize(url,data){
     return dispatch=>{
         service.fetchPost(
-            'http://localhost/php/thinkphp/home/list/index',
+            'http://localhost/php/home/list/index',
             data).then(res=>{
             console.log(res);
         })

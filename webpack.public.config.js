@@ -5,13 +5,14 @@ var webpack = require('webpack');
 var path = require('path');
 module.exports = {
     entry: {
-        bundle:'./src2/js/index.js',
-        vendor: ['react']
+        bundle:'./src/js/index.js',
+        vendor: ['react','react-redux','redux','react-router','isomorphic-fetch','jquery','redux-thunk']
     },
     output: {
         publicPath:'/public/js/',
         path: __dirname+'/public/js',
-        filename: 'bundle.js'
+        // filename: 'bundle.js'
+        filename: '[name].js'
     },
     resolve: {
         extensions: ['', '.js','jsx']
@@ -23,6 +24,10 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loaders: ['react-hot', 'babel']
+            },
+            {
+                test: /\.css$/,
+                loaders: ['style', 'css']
             }
         ]
     },
@@ -40,8 +45,8 @@ module.exports = {
             }
         }),
         new webpack.ProvidePlugin({
-            "Action": __dirname + "/src2/js/actions/index.js",
-            "Common": __dirname + "/src2/js/constants/index.js"
+            "Action": __dirname + "/src/js/actions/index.js",
+            "Common": __dirname + "/src/js/constants/index.js"
         })
     ]
 };

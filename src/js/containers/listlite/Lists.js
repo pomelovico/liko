@@ -16,7 +16,8 @@ class Lists extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            isEditingList:false
+            isEditingList:false,
+            isFetchingOnce:true
         }
     }
     componentWillMount(){
@@ -25,25 +26,19 @@ class Lists extends React.Component{
         );
     }
     componentWillReceiveProps(nextProps){
+        if(!nextProps.isFetchingTasks){
+            this.setState({
+                isFetchingOnce:false
+            });
+        }
         this.setState({
             isEditingList:false
         });
-        /*默认显示收件箱的tasks*/
-/*        if(this.props.current_list != nextProps.current_list){
-            if(!this.props.lists[this.props.default_list].hasFetched){
-                this.props.getTaskTodo({list_id:this.props.default_list});
-            }
-        }*/
-    }
-    showEditPanel(list){
-        return (<ListPanel
-            hiddenPanel={()=>this.setState({isEditingList:null})}
-            list={list}
-             />)
     }
     getTasks(id){
         if(!this.props.lists[id].hasFetched){
             this.props.getTaskTodo({list_id:id});
+            this.props.setFetchTasksStatus(true);
         }
         this.props.setCurrentList(id);
     }
@@ -71,6 +66,9 @@ class Lists extends React.Component{
         }
         /*清单列表*/
         return (<div id="listlite-sider-bar" className="panel p-ml">
+            <div className={this.state.isFetchingOnce?"loading active":'loading'}>
+                <i className={`icon-spinner ${this.state.isFetchingOnce ? 'icon-spin':''}`}></i>
+            </div>
             <div className={default_list == current_list ? "ll-list-default active":"ll-list-default"}>
                 <List
                     list_id={default_list}
@@ -81,9 +79,11 @@ class Lists extends React.Component{
             <ul>{temp}</ul>
             <div
                 className="p-t-ml cur-p"
-                style={{color:"#6396b5"}}
+                style={{color:"#1fb6ec"}}
                 onClick={()=>this.setState({isEditingList:-1})}
-            ><i className=" icon-plus"></i>&nbsp;&nbsp;创建清单</div>
+            >
+                <i className=" icon-plus"></i>&nbsp;&nbsp;创建清单
+            </div>
 
             {/*清单编辑面板*/}
             <ListPanel
@@ -101,10 +101,11 @@ export default connect(
             current_list:state.listlite.user.current_list
         };
     },(dispatch)=>{
-        let listLiteActions = bindActionCreators(Action.listlite,dispatch);
+        let listliteActions = bindActionCreators(Action.listlite,dispatch);
         return {
-            listInitialize:listLiteActions.listInitialize,
-            setCurrentList:listLiteActions.setCurrentList,
-            getTaskTodo:listLiteActions.getTaskTodo
+            listInitialize:listliteActions.listInitialize,
+            setCurrentList:listliteActions.setCurrentList,
+            getTaskTodo:listliteActions.getTaskTodo,
+            setFetchTasksStatus:listliteActions.setFetchTasksStatus
         };
     })(Lists);

@@ -29,7 +29,7 @@ class Root extends Component{
         super(props);
     }
     componentDidMount(){
-        document.getElementById('App').style.minHeight = document.body.clientHeight+'px';
+        // document.getElementById('App').style.minHeight = document.body.clientHeight+'px';
     }
     render(){
         return(

@@ -30,7 +30,7 @@ class TaskDetail extends React.Component{
     componentDidMount(){
         let addTaskInput = document.getElementById('ll-addTask-input');
         setTimeout(()=>{
-            addTaskInput.addEventListener('focus',e=>this.props.collapseDetail())
+            addTaskInput.addEventListener('focus',e=>this.props.collapseDetail());
         },0)
     }
     componentWillReceiveProps(nextProps){
@@ -67,26 +67,7 @@ class TaskDetail extends React.Component{
         const task = this.props.task || {};
 
         return this.state.hidden ? null : (<div className={this.state.expanded?"ll-taskdetail-panel active":"ll-taskdetail-panel"}>
-            <h3>清单——{this.props.list_name}</h3>
-            {
-/*                <div className="d-t task-content">
-                    <div className="d-tc">
-                        <Input
-                            defaultClass="ll-input"
-                            defaultValue={task.content}
-                            onInputFieldChange={(content)=>this.setState({content:content})}
-                        />
-                    </div>
-                    <div className="d-tc w">
-                        <DateField
-                            minDate={new Date()}
-                            dateFormat="YYYY-MM-DD"
-                            defaultValue={new Date(parseInt(task.due_time))}
-                            onChange={(ds, obj)=>this.setDueTime(obj.dateMoment.unix()*1000)}
-                        />
-                    </div>
-                </div>*/
-            }
+            <h3 style={{fontWeight:'300'}}>清单——{this.props.list_name}</h3>
             <div className="pos-r task-content">
                 <Input
                     defaultClass="ll-input"
@@ -112,6 +93,7 @@ class TaskDetail extends React.Component{
                 ><i className={this.state.isEdit?"icon-spinner icon-spin":"icon-ok"}></i></button>
                 <button
                     onClick={()=>this.props.collapseDetail()}
+                    style={{ position: 'absolute',top: '8px',right: '12px'}}
                 ><i className="icon-remove"></i></button>
             </p>
         </div>)

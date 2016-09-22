@@ -11,7 +11,7 @@ module.exports = {
     ],
     devtool: "source-map",
 /*    entry: {
-        bundle:'./src2/js/index.js', 
+        bundle:'./src/js/index.js', 
         vendor: ['react']
     },*/
     output: {

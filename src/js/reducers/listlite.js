@@ -22,8 +22,8 @@ function lists(state,action){
         case Common.LIST.INDEX: return data;
 
         case Common.LIST.FETCHING:
-            if(temp[action.list_id]){
-                temp[action.list_id].isFetching=true;
+            if(temp[action.data]){
+                temp[action.data].isFetching=true;
             }
             return temp;
 
@@ -129,6 +129,9 @@ function user(state,action){
         /*创建一个清单*/
         case Common.LIST.CREATE_LIST:
             temp.current_list = parseInt(data.list_id);
+            return temp;
+        case Common.LIST.FETCH_TASKS:
+            temp.isFetchingTasks = data;
             return temp;
         default: return state;
     }
